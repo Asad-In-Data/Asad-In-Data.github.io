@@ -524,11 +524,19 @@ a:hover {
 }
 
 .stat-item {
-    padding: var(--spacing-md);
-    background: var(--white);
+    padding: var(--spacing-lg);
+    background: rgba(255,255,255,0.8);
     border-radius: var(--radius-lg);
     border-left: 4px solid var(--primary-color);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    border-left-color: var(--secondary-color);
 }
 
 .stat-label {
@@ -997,7 +1005,7 @@ a:hover {
 =================================== */
 .timeline {
     position: relative;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -1007,8 +1015,8 @@ a:hover {
     left: 50%;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: var(--gray-300);
+    width: 3px;
+    background: var(--primary-color);
     transform: translateX(-50%);
 }
 
@@ -1020,13 +1028,13 @@ a:hover {
 
 .timeline-item:nth-child(odd) {
     left: 0;
-    padding-right: var(--spacing-lg);
+    padding-right: var(--spacing-xl);
     text-align: right;
 }
 
 .timeline-item:nth-child(even) {
     left: 50%;
-    padding-left: var(--spacing-lg);
+    padding-left: var(--spacing-xl);
 }
 
 .timeline-content {
@@ -1034,7 +1042,6 @@ a:hover {
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    border: 1px solid var(--gray-200);
     position: relative;
 }
 
@@ -1075,6 +1082,7 @@ a:hover {
     color: var(--gray-900);
     font-size: 1.25rem;
     margin-bottom: var(--spacing-xs);
+    font-weight: 700;
 }
 
 .timeline-company {
@@ -1093,31 +1101,30 @@ a:hover {
     position: absolute;
     top: 20px;
     left: 50%;
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     background: var(--primary-color);
-    border: 4px solid var(--white);
+    border: 3px solid var(--white);
     border-radius: 50%;
     transform: translateX(-50%);
-    z-index: 1;
-    box-shadow: var(--shadow-md);
+    z-index: 2;
 }
 
 @media (max-width: 768px) {
     .timeline::before {
-        left: 20px;
+        left: 30px;
     }
     
     .timeline-item {
         width: 100%;
         left: 0 !important;
         padding-left: var(--spacing-2xl) !important;
-        padding-right: 0 !important;
+        padding-right: var(--spacing-md) !important;
         text-align: left !important;
     }
     
     .timeline-item::before {
-        left: 20px;
+        left: 30px;
         transform: none;
     }
     
@@ -1338,86 +1345,370 @@ a:hover {
 /* ===================================
    CONTACT SECTION
 =================================== */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-3xl);
+.contact-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
 }
 
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
+.contact-section .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contact-section .section-subtitle {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.contact-section .section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 20px;
+}
+
+.contact-section .section-description {
+    font-size: 1.2rem;
+    color: var(--gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Contact Information Section */
+.contact-main-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gray-100);
+}
+
+.contact-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 10px;
+}
+
+.contact-header p {
+    color: var(--gray-600);
+    font-size: 1.1rem;
+}
+
+.contact-items {
+    margin-bottom: 40px;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-lg);
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--gray-200);
-    transition: all var(--transition-fast);
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--gray-100);
+    transition: all 0.3s ease;
+}
+
+.contact-item:last-child {
+    border-bottom: none;
 }
 
 .contact-item:hover {
-    transform: translateX(8px);
-    box-shadow: var(--shadow-md);
+    transform: translateX(10px);
+    background: var(--gray-50);
+    margin: 0 -20px;
+    padding: 20px;
+    border-radius: 12px;
 }
 
 .contact-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 60px;
     height: 60px;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--white);
-    border-radius: 50%;
-    font-size: 1.5rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
 .contact-details h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
     color: var(--gray-900);
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: 5px;
 }
 
 .contact-details p {
     color: var(--gray-600);
+    font-size: 1rem;
     margin: 0;
 }
 
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    margin-top: 5px;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Social Section */
+.social-section {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 2px solid var(--gray-100);
+}
+
+.social-section h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 25px;
+}
+
 .social-links {
-    display: flex;
-    gap: var(--spacing-md);
-    justify-content: center;
-    margin-top: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
 }
 
 .social-link {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background: var(--gray-100);
-    color: var(--gray-600);
-    border-radius: 50%;
-    transition: all var(--transition-fast);
+    gap: 12px;
+    padding: 15px 20px;
+    background: var(--gray-50);
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.social-link.linkedin {
+    color: #0077b5;
+}
+
+.social-link.github {
+    color: #333;
+}
+
+.social-link.kaggle {
+    color: #20beff;
+}
+
+.social-link.portfolio {
+    color: #ff6b35;
 }
 
 .social-link:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-4px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    background: white;
+    border-color: currentColor;
 }
 
+.social-link i {
+    font-size: 20px;
+}
+
+.social-link span {
+    font-size: 14px;
+}
+
+/* Contact Form Section */
+.contact-form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: var(--gray-600);
+    font-size: 1.1rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    font-size: 16px;
+    background: var(--gray-50);
+    transition: all 0.3s ease;
+    outline: none;
+    color: var(--gray-900);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group label {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    color: var(--gray-500);
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-color);
+    background: white;
+    padding: 0 8px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 18px 30px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .contact-grid {
+    .contact-section {
+        padding: 60px 0;
+    }
+
+    .contact-section .section-title {
+        font-size: 2.5rem;
+    }
+
+    .contact-wrapper {
         grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
+        gap: 40px;
+    }
+
+    .contact-main-card,
+    .contact-form-card {
+        padding: 30px 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .social-links {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .contact-form-card {
+        position: static;
     }
 }
 
@@ -1731,7 +2022,7 @@ a:hover {
                     <div class="about-stats">
                         <div class="stat-item">
                             <div class="stat-label">Total Experience</div>
-                            <div class="stat-value">4+ years</div>
+                            <div class="stat-value">3+ years</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-label">Projects Completed</div>
@@ -1975,7 +2266,7 @@ a:hover {
                 <div class="timeline-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="timeline-content">
                         <div class="timeline-date">Jun 2023 - Dec 2024</div>
-                        <h3 class="timeline-title">Senior Data Analyst</h3>
+                        <h3 class="timeline-title"> Data Analyst</h3>
                         <div class="timeline-company">DataInsights Solutions Pvt Ltd</div>
                         <p class="timeline-description">
                             Led data analytics initiatives for enterprise clients, developing advanced dashboards and predictive models. Implemented machine learning algorithms for business forecasting, resulting in 30% improved decision-making accuracy. Managed end-to-end data pipelines and collaborated with cross-functional teams.
@@ -2483,160 +2774,128 @@ a:hover {
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-subtitle">Get In Touch</span>
-                <h2 class="section-title">Let's Work Together</h2>
+                <h2 class="section-title">Let's Connect</h2>
                 <p class="section-description">
-                    Ready to collaborate on your next project? Let's connect and create something amazing together.
+                    Ready to discuss your next data project? I'd love to help you turn data into actionable insights.
                 </p>
             </div>
 
-            <div class="contact-content">
-                <!-- Contact Info Cards -->
-                <div class="contact-info" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
-                    <div class="contact-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="300">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
+            <div class="contact-wrapper">
+                <!-- Contact Information -->
+                <div class="contact-info-section" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="contact-main-card">
+                        <div class="contact-header">
+                            <h3>Contact Information</h3>
+                            <p>Reach out to me through any of these channels</p>
                         </div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p>asadalihere2@gmail.com</p>
-                            <a href="mailto:asadalihere2@gmail.com" class="contact-link">Send Email</a>
-                        </div>
-                    </div>
+                        
+                        <div class="contact-items">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Email</h4>
+                                    <p>asadalich56@gmail.com</p>
+                                </div>
+                            </div>
 
-                    <div class="contact-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="400">
-                        <div class="contact-icon">
-                            <i class="fab fa-linkedin"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>LinkedIn</h4>
-                            <p>Connect with me professionally</p>
-                            <a href="https://www.linkedin.com/in/asadalianalyst/" target="_blank" class="contact-link">Connect</a>
-                        </div>
-                    </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Phone</h4>
+                                    <p>+92 327 6593583</p>
+                                </div>
+                            </div>
 
-                    <div class="contact-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="500">
-                        <div class="contact-icon">
-                            <i class="fab fa-github"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>GitHub</h4>
-                            <p>Explore my code repositories</p>
-                            <a href="https://github.com/Asad-In-Data" target="_blank" class="contact-link">View Projects</a>
-                        </div>
-                    </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Location</h4>
+                                    <p>Lahore, Pakistan</p>
+                                </div>
+                            </div>
 
-                    <div class="contact-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="600">
-                        <div class="contact-icon">
-                            <i class="fab fa-kaggle"></i>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-file-download"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Resume</h4>
+                                    <a href="https://drive.google.com/file/d/17mW8e9u2CwUFsByNw8Fc1uPNchoDlSPw/view?usp=drive_link" target="_blank" class="download-btn">
+                                        <i class="fas fa-download"></i>
+                                        Download CV
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="contact-details">
-                            <h4>Kaggle</h4>
-                            <p>Data science competitions & datasets</p>
-                            <a href="https://www.kaggle.com/asadanalyst" target="_blank" class="contact-link">View Profile</a>
-                        </div>
-                    </div>
 
-                    <div class="contact-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="700">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Phone</h4>
-                            <p>+92 327 6593583</p>
-                            <a href="tel:+923276593583" class="contact-link">Call Me</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="800">
-                        <div class="contact-icon">
-                            <i class="fas fa-file-download"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Resume</h4>
-                            <p>Download my CV</p>
-                            <a href="https://drive.google.com/file/d/17mW8e9u2CwUFsByNw8Fc1uPNchoDlSPw/view?usp=drive_link" target="_blank" class="contact-link">Download CV</a>
+                        <!-- Social Links -->
+                        <div class="social-section">
+                            <h4>Follow Me</h4>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/asad-in-data" target="_blank" class="social-link linkedin">
+                                    <i class="fab fa-linkedin-in"></i>
+                                    <span>LinkedIn</span>
+                                </a>
+                                <a href="https://github.com/Asad-In-Data" target="_blank" class="social-link github">
+                                    <i class="fab fa-github"></i>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="https://www.kaggle.com/asadanalyst" target="_blank" class="social-link kaggle">
+                                    <i class="fab fa-kaggle"></i>
+                                    <span>Kaggle</span>
+                                </a>
+                                <a href="https://mavenanalytics.io/profile/Asad-Ali/189147774" target="_blank" class="social-link portfolio">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Portfolio</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
-                <div class="contact-form-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-                    <div class="contact-form-container">
-                        <h3 class="form-title">Send Message</h3>
-                        <form class="contact-form" id="contactForm">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" id="name" name="name" required>
-                                    <label for="name">Your Name</label>
-                                    <div class="input-highlight"></div>
+                <!-- Quick Contact Form -->
+                <div class="contact-form-section" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="contact-form-card">
+                        <div class="form-header">
+                            <h3>Send a Message</h3>
+                            <p>Have a question? I'd love to hear from you!</p>
+                        </div>
+
+                        <form class="contact-form" action="https://forms.gle/YGFa87uwnHQrpcib7" method="GET" target="_blank">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="name" name="name" required placeholder=" ">
+                                    <label for="name">Full Name</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" required placeholder=" ">
+                                    <label for="email">Email Address</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="input-group">
-                                    <input type="email" id="email" name="email" required>
-                                    <label for="email">Your Email</label>
-                                    <div class="input-highlight"></div>
-                                </div>
+                                <input type="text" id="subject" name="subject" required placeholder=" ">
+                                <label for="subject">Subject</label>
                             </div>
 
                             <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" id="subject" name="subject" required>
-                                    <label for="subject">Subject</label>
-                                    <div class="input-highlight"></div>
-                                </div>
+                                <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
+                                <label for="message">Your Message</label>
                             </div>
 
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <textarea id="message" name="message" rows="5" required></textarea>
-                                    <label for="message">Your Message</label>
-                                    <div class="input-highlight"></div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="submit-btn">
-                                    <span class="btn-text">Send Message</span>
-                                    <span class="btn-icon">
-                                        <i class="fas fa-paper-plane"></i>
-                                    </span>
-                                    <div class="btn-ripple"></div>
-                                </button>
-                            </div>
+                            <button type="submit" class="submit-btn">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
-            </div>
-
-            <!-- Social Connect -->
-            <div class="social-connect" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="700">
-                <h4>Follow My Journey</h4>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/asadalianalyst/" target="_blank" class="social-link linkedin" data-tooltip="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://github.com/Asad-In-Data" target="_blank" class="social-link github" data-tooltip="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.kaggle.com/asadanalyst" target="_blank" class="social-link kaggle" data-tooltip="Kaggle">
-                        <i class="fab fa-kaggle"></i>
-                    </a>
-                    <a href="mailto:asadalihere2@gmail.com" class="social-link email" data-tooltip="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://mavenanalytics.io/profile/Asad-Ali/189147774" target="_blank" class="social-link portfolio" data-tooltip="Portfolio">
-                        <i class="fas fa-chart-line"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Animated Background -->
-            <div class="contact-bg-animation">
-                <div class="floating-shape shape-1"></div>
-                <div class="floating-shape shape-2"></div>
-                <div class="floating-shape shape-3"></div>
             </div>
         </div>
     </section>
