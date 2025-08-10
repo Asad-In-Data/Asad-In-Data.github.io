@@ -1556,6 +1556,125 @@ a:hover {
     font-size: 14px;
 }
 
+/* Separate Social Media Section */
+.social-media-section {
+    background: linear-gradient(135deg, var(--gray-50), var(--white));
+    padding: var(--spacing-3xl) 0;
+    margin-top: var(--spacing-2xl);
+    border-top: 1px solid var(--gray-200);
+}
+
+.social-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 var(--spacing-lg);
+}
+
+.social-container h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-md);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.social-container p {
+    font-size: 1.1rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-2xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.social-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.social-links-grid .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-links-grid .social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+}
+
+.social-links-grid .social-link:hover::before {
+    left: 100%;
+}
+
+.social-links-grid .social-link:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color);
+}
+
+.social-links-grid .social-link.linkedin:hover {
+    background: linear-gradient(135deg, #0077b5, #0096d6);
+    color: white;
+    border-color: #0077b5;
+}
+
+.social-links-grid .social-link.github:hover {
+    background: linear-gradient(135deg, #333, #555);
+    color: white;
+    border-color: #333;
+}
+
+.social-links-grid .social-link.kaggle:hover {
+    background: linear-gradient(135deg, #20beff, #1da1f2);
+    color: white;
+    border-color: #20beff;
+}
+
+.social-links-grid .social-link.portfolio:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.social-links-grid .social-link i {
+    font-size: 1.5rem;
+    transition: transform var(--transition-base);
+}
+
+.social-links-grid .social-link:hover i {
+    transform: scale(1.2);
+}
+
+.social-links-grid .social-link span {
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all var(--transition-base);
+}
+
 /* Contact Form Section */
 .contact-form-card {
     background: white;
@@ -1920,6 +2039,24 @@ a:hover {
     
     .project-card:hover {
         transform: translateY(-10px);
+    }
+    
+    .social-container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .social-container h3 {
+        font-size: 2rem;
+    }
+    
+    .social-links-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+        max-width: 400px;
+    }
+    
+    .social-links-grid .social-link {
+        padding: var(--spacing-md) var(--spacing-lg);
     }
 }
 
@@ -2347,6 +2484,9 @@ a:hover {
                 <button class="filter-btn" data-filter="tableau">
                     <i class="fas fa-chart-area"></i> Tableau
                 </button>
+                <button class="filter-btn" data-filter="cpp">
+                    <i class="fas fa-code"></i> C++
+                </button>
                 <button class="filter-btn" data-filter="ml">
                     <i class="fas fa-brain"></i> Machine Learning
                 </button>
@@ -2754,6 +2894,43 @@ a:hover {
                         </div>
                     </div>
                 </div>
+
+                <!-- Web Scraping Projects -->
+                <div class="project-card" data-category="python" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
+                    <div class="project-image">
+                        <img src="images/Web_Scrape.png" alt="ScrapeMaster Pro">
+                        <div class="project-overlay">
+                            <a href="https://github.com/Asad-In-Data" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/Asad-In-Data" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">ScrapeMaster Automated Web Scraper</h3>
+                        <p class="project-description">
+                            Intelligent automated web scraping solution built with Python, featuring dynamic content extraction, anti-detection mechanisms, and multi-threading capabilities. Supports various data formats, handles JavaScript-rendered pages, and includes built-in data cleaning and export functionalities for seamless data harvesting at scale.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Selenium</span>
+                            <span class="tech-tag">BeautifulSoup</span>
+                            <span class="tech-tag">Web Automation</span>
+                        </div>
+                        <div class="project-stats">
+                            <div class="project-stat">
+                                <i class="fas fa-spider"></i>
+                                <span>Web Scraping</span>
+                            </div>
+                            <div class="project-stat">
+                                <i class="fas fa-calendar"></i>
+                                <span>2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="text-center mt-5" data-aos="fade-up">
@@ -2833,33 +3010,10 @@ a:hover {
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Social Links -->
-                        <div class="social-section">
-                            <h4>Follow Me</h4>
-                            <div class="social-links">
-                                <a href="https://www.linkedin.com/in/asad-in-data" target="_blank" class="social-link linkedin">
-                                    <i class="fab fa-linkedin-in"></i>
-                                    <span>LinkedIn</span>
-                                </a>
-                                <a href="https://github.com/Asad-In-Data" target="_blank" class="social-link github">
-                                    <i class="fab fa-github"></i>
-                                    <span>GitHub</span>
-                                </a>
-                                <a href="https://www.kaggle.com/asadanalyst" target="_blank" class="social-link kaggle">
-                                    <i class="fab fa-kaggle"></i>
-                                    <span>Kaggle</span>
-                                </a>
-                                <a href="https://mavenanalytics.io/profile/Asad-Ali/189147774" target="_blank" class="social-link portfolio">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Portfolio</span>
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Quick Contact Form -->
+                <!-- Contact Form -->
                 <div class="contact-form-section" data-aos="fade-left" data-aos-duration="1000">
                     <div class="contact-form-card">
                         <div class="form-header">
@@ -2894,6 +3048,32 @@ a:hover {
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Media Section -->
+            <div class="social-media-section" data-aos="fade-up" data-aos-duration="1000">
+                <div class="social-container">
+                    <h3>Follow Me</h3>
+                    <p>Connect with me on social media and professional platforms</p>
+                    <div class="social-links-grid">
+                        <a href="https://www.linkedin.com/in/asad-in-data" target="_blank" class="social-link linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/Asad-In-Data" target="_blank" class="social-link github">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.kaggle.com/asadanalyst" target="_blank" class="social-link kaggle">
+                            <i class="fab fa-kaggle"></i>
+                            <span>Kaggle</span>
+                        </a>
+                        <a href="https://mavenanalytics.io/profile/Asad-Ali/189147774" target="_blank" class="social-link portfolio">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Portfolio</span>
+                        </a>
                     </div>
                 </div>
             </div>
