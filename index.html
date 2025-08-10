@@ -714,6 +714,7 @@ a:hover {
 =================================== */
 .skills-categories {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: var(--spacing-xl);
     position: relative;
 }
@@ -962,6 +963,68 @@ a:hover {
 .tech-icon.arduino { 
     background: linear-gradient(135deg, #00979d, #20c997, #4caf50);
     box-shadow: 0 10px 25px rgba(0, 151, 157, 0.4);
+}
+
+/* Development Tools Icons */
+.tech-icon.git { 
+    background: linear-gradient(135deg, #f14e32, #ff6b35, #ff5722);
+    box-shadow: 0 10px 25px rgba(241, 78, 50, 0.4);
+}
+.tech-icon.github { 
+    background: linear-gradient(135deg, #24292e, #586069, #6a737d);
+    box-shadow: 0 10px 25px rgba(36, 41, 46, 0.4);
+}
+.tech-icon.jupyter { 
+    background: linear-gradient(135deg, #f37626, #ff9800, #ffab40);
+    box-shadow: 0 10px 25px rgba(243, 118, 38, 0.4);
+}
+.tech-icon.vscode { 
+    background: linear-gradient(135deg, #007acc, #2196f3, #03a9f4);
+    box-shadow: 0 10px 25px rgba(0, 122, 204, 0.4);
+}
+.tech-icon.pycharm { 
+    background: linear-gradient(135deg, #21d789, #4caf50, #8bc34a);
+    box-shadow: 0 10px 25px rgba(33, 215, 137, 0.4);
+}
+.tech-icon.anaconda { 
+    background: linear-gradient(135deg, #44a047, #4caf50, #66bb6a);
+    box-shadow: 0 10px 25px rgba(68, 160, 71, 0.4);
+}
+.tech-icon.docker { 
+    background: linear-gradient(135deg, #0db7ed, #2196f3, #03a9f4);
+    box-shadow: 0 10px 25px rgba(13, 183, 237, 0.4);
+}
+.tech-icon.postman { 
+    background: linear-gradient(135deg, #ff6c37, #ff7043, #ff5722);
+    box-shadow: 0 10px 25px rgba(255, 108, 55, 0.4);
+}
+
+/* Web Technologies Icons */
+.tech-icon.javascript { 
+    background: linear-gradient(135deg, #f7df1e, #ffeb3b, #ffc107);
+    box-shadow: 0 10px 25px rgba(247, 223, 30, 0.4);
+}
+
+/* Other Technologies Icons */
+.tech-icon.linux { 
+    background: linear-gradient(135deg, #fcc624, #ff9800, #f57c00);
+    box-shadow: 0 10px 25px rgba(252, 198, 36, 0.4);
+}
+.tech-icon.aws { 
+    background: linear-gradient(135deg, #ff9900, #ff9800, #f57c00);
+    box-shadow: 0 10px 25px rgba(255, 153, 0, 0.4);
+}
+.tech-icon.googlecloud { 
+    background: linear-gradient(135deg, #4285f4, #2196f3, #03a9f4);
+    box-shadow: 0 10px 25px rgba(66, 133, 244, 0.4);
+}
+.tech-icon.mongodb { 
+    background: linear-gradient(135deg, #47a248, #4caf50, #66bb6a);
+    box-shadow: 0 10px 25px rgba(71, 162, 72, 0.4);
+}
+.tech-icon.firebase { 
+    background: linear-gradient(135deg, #ffca28, #ffc107, #ff9800);
+    box-shadow: 0 10px 25px rgba(255, 202, 40, 0.4);
 }
 
 .tech-name {
@@ -1997,6 +2060,11 @@ a:hover {
         grid-template-columns: 1fr;
     }
     
+    .skills-categories {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
     .expertise-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-sm);
@@ -2246,12 +2314,6 @@ a:hover {
                             </div>
                             <span class="tech-name">C++</span>
                         </div>
-                        <div class="tech-item">
-                            <div class="tech-icon c">
-                                <i class="fas fa-terminal"></i>
-                            </div>
-                            <span class="tech-name">C</span>
-                        </div>
                     </div>
                 </div>
 
@@ -2341,11 +2403,69 @@ a:hover {
                     </div>
                 </div>
 
-                <!-- Web & Other Technologies -->
+                <!-- Development Tools -->
                 <div class="skill-category" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                     <h3 class="category-title">
+                        <i class="fas fa-tools"></i>
+                        Development Tools
+                    </h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-icon git">
+                                <i class="fab fa-git-alt"></i>
+                            </div>
+                            <span class="tech-name">Git</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon github">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <span class="tech-name">GitHub</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon jupyter">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <span class="tech-name">Jupyter</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon vscode">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <span class="tech-name">VS Code</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon pycharm">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <span class="tech-name">PyCharm</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon anaconda">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <span class="tech-name">Anaconda</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon docker">
+                                <i class="fab fa-docker"></i>
+                            </div>
+                            <span class="tech-name">Docker</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon postman">
+                                <i class="fas fa-mail-bulk"></i>
+                            </div>
+                            <span class="tech-name">Postman</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Technologies -->
+                <div class="skill-category" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                    <h3 class="category-title">
                         <i class="fas fa-globe"></i>
-                        Web & Other Technologies
+                        Web Technologies
                     </h3>
                     <div class="tech-grid">
                         <div class="tech-item">
@@ -2367,10 +2487,56 @@ a:hover {
                             <span class="tech-name">Streamlit</span>
                         </div>
                         <div class="tech-item">
+                            <div class="tech-icon javascript">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <span class="tech-name">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Technologies -->
+                <div class="skill-category" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
+                    <h3 class="category-title">
+                        <i class="fas fa-microchip"></i>
+                        Other Technologies
+                    </h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
                             <div class="tech-icon arduino">
                                 <i class="fas fa-microchip"></i>
                             </div>
                             <span class="tech-name">Arduino</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon linux">
+                                <i class="fab fa-linux"></i>
+                            </div>
+                            <span class="tech-name">Linux</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon aws">
+                                <i class="fab fa-aws"></i>
+                            </div>
+                            <span class="tech-name">AWS</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon googlecloud">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <span class="tech-name">Google Cloud</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon mongodb">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <span class="tech-name">MongoDB</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon firebase">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <span class="tech-name">Firebase</span>
                         </div>
                     </div>
                 </div>
@@ -2641,7 +2807,7 @@ a:hover {
 
                 <div class="project-card" data-category="sql" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                     <div class="project-image">
-                        <img src="images/sales analysis.jpg" alt="Sales Analysis">
+                        <img src="images/E_Commerce.png" alt="Sales Analysis">
                         <div class="project-overlay">
                             <a href="https://github.com/Asad-In-Data" class="project-link" target="_blank">
                                 <i class="fas fa-external-link-alt"></i>
