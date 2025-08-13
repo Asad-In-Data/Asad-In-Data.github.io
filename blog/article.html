@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="article-title">Article Title - Asad In Data</title>
+    <meta name="description" id="article-description" content="Article description">
+    <meta name="keywords" content="Data Analytics, Power BI, Python, SQL, Data Science">
+    <meta name="author" content="Asad Ali">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" id="og-title" content="Article Title">
+    <meta property="og:description" id="og-description" content="Article description">
+    <meta property="og:type" content="article">
+    <meta property="og:url" id="og-url" content="">
+    <meta property="og:image" id="og-image" content="">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitter-title" content="Article Title">
+    <meta name="twitter:description" id="twitter-description" content="Article description">
+    <meta name="twitter:image" id="twitter-image" content="">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" id="structured-data">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Article Title",
+        "author": {
+            "@type": "Person",
+            "name": "Asad Ali"
+        },
+        "datePublished": "",
+        "dateModified": "",
+        "image": "",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Asad In Data",
+            "logo": {
+                "@type": "ImageObject",
+                "url": ""
+            }
+        }
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234F46E5'/%3E%3Cstop offset='100%25' style='stop-color:%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='6' fill='url(%23grad)'/%3E%3Ctext x='16' y='23' font-family='Space Grotesk, Arial Black, sans-serif' font-size='18' font-weight='700' font-style='italic' text-anchor='middle' fill='white'%3EA%3C/text%3E%3C/svg%3E">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./components/blog-styles.css">
+    <link rel="stylesheet" href="./components/article-styles.css">
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Blog
+                </a>
+            </div>
+            <div class="nav-actions">
+                <button class="share-btn" id="share-btn" aria-label="Share article">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+                <button class="bookmark-btn" id="bookmark-btn" aria-label="Bookmark article">
+                    <i class="far fa-bookmark"></i>
+                </button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="container">
+            <div class="breadcrumb" data-aos="fade-up">
+                <a href="index.html">Blog</a>
+                <span class="breadcrumb-separator">/</span>
+                <span id="article-category">Category</span>
+            </div>
+            
+            <h1 class="article-header-title" id="main-title" data-aos="fade-up" data-aos-delay="100">
+                Article Title Loading...
+            </h1>
+            
+            <div class="article-header-meta" data-aos="fade-up" data-aos-delay="200">
+                <div class="author-info">
+                    <img src="../images/aboutme.jfif" alt="Asad Ali" class="author-avatar">
+                    <div class="author-details">
+                        <span class="author-name">Asad Ali</span>
+                        <span class="author-title">Data Analyst</span>
+                    </div>
+                </div>
+                <div class="article-stats">
+                    <span class="article-date">
+                        <i class="fas fa-calendar"></i>
+                        <span id="publish-date">Date</span>
+                    </span>
+                    <span class="reading-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="read-time">5 min read</span>
+                    </span>
+                    <span class="article-views">
+                        <i class="fas fa-eye"></i>
+                        <span id="view-count">1,234</span> views
+                    </span>
+                </div>
+            </div>
+            
+            <div class="article-tags" id="article-tags" data-aos="fade-up" data-aos-delay="300">
+                <!-- Tags will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <main class="article-main">
+        <div class="article-container">
+            <!-- Table of Contents -->
+            <aside class="article-sidebar">
+                <div class="toc-container">
+                    <h3 class="toc-title">Table of Contents</h3>
+                    <nav class="table-of-contents" id="table-of-contents">
+                        <!-- TOC will be generated by JavaScript -->
+                    </nav>
+                </div>
+                
+                <!-- Social Share Sidebar -->
+                <div class="social-share-sidebar">
+                    <h4>Share this article</h4>
+                    <div class="share-buttons-vertical">
+                        <a href="#" class="share-btn-vertical twitter" data-platform="twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="share-btn-vertical linkedin" data-platform="linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="share-btn-vertical facebook" data-platform="facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="share-btn-vertical reddit" data-platform="reddit">
+                            <i class="fab fa-reddit"></i>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Article Body -->
+            <article class="article-body" id="article-content">
+                <div class="article-image-container" data-aos="fade-up">
+                    <img id="featured-image" src="" alt="" class="featured-image">
+                </div>
+                
+                <!-- Article content will be loaded here -->
+                <div id="article-text">
+                    <p>Loading article content...</p>
+                </div>
+                
+                <!-- Article Navigation -->
+                <nav class="article-navigation" data-aos="fade-up">
+                    <div class="nav-item prev-article">
+                        <span class="nav-label">Previous Article</span>
+                        <a href="#" class="nav-link" id="prev-article">
+                            <i class="fas fa-arrow-left"></i>
+                            <span class="nav-title">Previous Article Title</span>
+                        </a>
+                    </div>
+                    <div class="nav-item next-article">
+                        <span class="nav-label">Next Article</span>
+                        <a href="#" class="nav-link" id="next-article">
+                            <span class="nav-title">Next Article Title</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <!-- Author Bio Section -->
+    <section class="author-bio-section">
+        <div class="container">
+            <div class="author-bio" data-aos="fade-up">
+                <div class="author-bio-image">
+                    <img src="../images/aboutme.jfif" alt="Asad Ali" class="author-bio-avatar">
+                </div>
+                <div class="author-bio-content">
+                    <h3 class="author-bio-name">Asad Ali</h3>
+                    <p class="author-bio-title">Data Analyst & Tech Blogger</p>
+                    <p class="author-bio-description">
+                        Passionate about transforming complex data into actionable business insights. 
+                        With expertise in Power BI, Python, SQL, and data visualization, I help organizations 
+                        make data-driven decisions. Follow me for the latest trends and techniques in data analytics.
+                    </p>
+                    <div class="author-bio-social">
+                        <a href="https://linkedin.com/in/asad-ali" target="_blank" class="author-social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Datz-AsadAnalyst" target="_blank" class="author-social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://medium.com/@asadali" target="_blank" class="author-social-link">
+                            <i class="fab fa-medium"></i>
+                        </a>
+                        <a href="https://twitter.com/asadanalyst" target="_blank" class="author-social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="related-articles-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Related Articles</h2>
+            <div class="related-articles-grid" id="related-articles">
+                <!-- Related articles will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section class="comments-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Comments</h2>
+            <div class="comments-container" data-aos="fade-up" data-aos-delay="100">
+                <!-- You can integrate with Disqus, Utterances, or similar commenting system -->
+                <div class="comments-placeholder">
+                    <p>Comments coming soon! Follow me on social media for discussions.</p>
+                    <div class="social-discussion">
+                        <a href="https://twitter.com/intent/tweet?text=Check out this article by @asadanalyst" target="_blank" class="discuss-btn">
+                            <i class="fab fa-twitter"></i>
+                            Discuss on Twitter
+                        </a>
+                        <a href="https://linkedin.com/sharing/share-offsite/?url=" target="_blank" class="discuss-btn">
+                            <i class="fab fa-linkedin"></i>
+                            Share on LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="newsletter-cta">
+        <div class="container">
+            <div class="newsletter-content" data-aos="fade-up">
+                <h2>Enjoyed this article?</h2>
+                <p>Subscribe to get notified about new posts and insights in data analytics</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Asad In Data</h3>
+                    <p class="footer-description">
+                        Transforming data into actionable insights. Sharing knowledge and experiences 
+                        in the world of data analytics and business intelligence.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-section-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">Blog Home</a></li>
+                        <li><a href="../index.html" class="footer-link">Portfolio</a></li>
+                        <li><a href="#" class="footer-link">About</a></li>
+                        <li><a href="#" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-section-title">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Power BI</a></li>
+                        <li><a href="#" class="footer-link">Python</a></li>
+                        <li><a href="#" class="footer-link">SQL</a></li>
+                        <li><a href="#" class="footer-link">Tutorials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-section-title">Follow Me</h4>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com/in/asad-ali" target="_blank" class="footer-social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Datz-AsadAnalyst" target="_blank" class="footer-social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://medium.com/@asadali" target="_blank" class="footer-social-link">
+                            <i class="fab fa-medium"></i>
+                        </a>
+                        <a href="https://twitter.com/asadanalyst" target="_blank" class="footer-social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Asad In Data. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./components/blog-script.js"></script>
+    <script src="./components/article-script.js"></script>
+</body>
+</html>
