@@ -161,14 +161,26 @@
                 </p>
             </div>
 
+            <!-- Search Bar -->
+            <div class="search-container" data-aos="fade-up" data-aos-delay="50">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search articles, topics, or keywords...">
+                    <button id="search-clear" class="search-clear" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="search-results-count" class="search-results-count" style="display: none;"></div>
+            </div>
+
             <!-- Filter Tabs -->
             <div class="filter-tabs" data-aos="fade-up" data-aos-delay="100">
                 <button class="filter-btn active" data-filter="all">All Articles</button>
-                <button class="filter-btn" data-filter="powerbi">Power BI</button>
+                <button class="filter-btn" data-filter="python">Machine Learning</button>
+                <button class="filter-btn" data-filter="insights">Model Comparison</button>
+                <button class="filter-btn" data-filter="classification">Classification</button>
+                <button class="filter-btn" data-filter="algorithms">Algorithms</button>
                 <button class="filter-btn" data-filter="python">Python</button>
-                <button class="filter-btn" data-filter="sql">SQL</button>
-                <button class="filter-btn" data-filter="tutorials">Tutorials</button>
-                <button class="filter-btn" data-filter="insights">Insights</button>
             </div>
 
             <!-- Articles Grid -->
@@ -240,6 +252,80 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <h2 class="contact-title">Get In Touch</h2>
+                    <p class="contact-subtitle">
+                        Have a question, want to collaborate, or need help with your data analytics project? 
+                        I'd love to hear from you!
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>asadalich56@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <h4>LinkedIn</h4>
+                                <p>Connect with me professionally</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Response Time</h4>
+                                <p>Usually within 24 hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name">Name *</label>
+                                <input type="text" id="contact-name" name="name" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email *</label>
+                                <input type="email" id="contact-email" name="email" class="form-input" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject *</label>
+                            <select id="contact-subject" name="subject" class="form-input" required>
+                                <option value="">Select a topic</option>
+                                <option value="consultation">Data Analytics Consultation</option>
+                                <option value="collaboration">Collaboration</option>
+                                <option value="question">General Question</option>
+                                <option value="feedback">Blog Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message *</label>
+                            <textarea id="contact-message" name="message" class="form-input form-textarea" rows="5" required placeholder="Tell me about your project or question..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary contact-submit">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                        <div class="form-status" id="contact-form-status"></div>
+                    </form>
                 </div>
             </div>
         </div>

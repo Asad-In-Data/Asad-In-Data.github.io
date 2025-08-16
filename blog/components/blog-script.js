@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTypingEffect();
     initializeCounters();
     initializeArticles();
+    initializeSearch();
+    initializeContactForm();
     initializeQuoteWidget();
     initializeNewsletterForm();
     initializeSmoothScrolling();
@@ -176,73 +178,59 @@ function initializeCounters() {
 const articlesData = [
     {
         id: 1,
-        title: "Getting Started with Power BI: A Complete Beginner's Guide",
-        excerpt: "Learn the fundamentals of Power BI and how to create your first dashboard. This comprehensive guide covers everything from data connection to visualization.",
-        category: "powerbi",
-        tags: ["Power BI", "Beginner", "Tutorial"],
-        date: "2025-01-15",
-        readTime: "8 min read",
-        image: "../images/Power BI 1.png",
+        title: "Mastering Logistic Regression as a Base Model – A Self-Taught Perspective",
+        excerpt: "As someone learning machine learning by building real-world projects, I've come to appreciate the power of Logistic Regression as a solid baseline model. Learn how it works, why we use it, and how to handle imbalanced data.",
+        category: "python",
+        tags: ["Machine Learning", "Logistic Regression", "Python", "Classification"],
+        date: "2025-01-20",
+        readTime: "12 min read",
+        image: "../images/Churn_ml.png",
         author: "Asad Ali"
     },
     {
         id: 2,
-        title: "Python for Data Analysis: Essential Libraries and Techniques",
-        excerpt: "Discover the most important Python libraries for data analysis including Pandas, NumPy, and Matplotlib. Learn practical techniques with real examples.",
+        title: "From Baseline to Power: Using Random Forest to Boost Classification Performance",
+        excerpt: "After building a solid baseline with Logistic Regression, discover how Random Forest can take your machine learning project to the next level. Learn about ensemble methods and feature importance.",
         category: "python",
-        tags: ["Python", "Data Analysis", "Pandas"],
-        date: "2025-01-10",
-        readTime: "12 min read",
+        tags: ["Random Forest", "Machine Learning", "Ensemble", "Feature Importance"],
+        date: "2025-01-18",
+        readTime: "10 min read",
         image: "../images/Auto_EDA.png",
         author: "Asad Ali"
-    }
-    // Commented out additional articles - uncomment when you add more content
-    /*
+    },
     {
         id: 3,
-        title: "SQL Optimization Techniques for Better Performance",
-        excerpt: "Master advanced SQL optimization techniques to improve query performance. Learn about indexing, query plans, and best practices.",
-        category: "sql",
-        tags: ["SQL", "Optimization", "Performance"],
-        date: "2025-01-05",
-        readTime: "10 min read",
-        image: "../images/Logic.png",
-        author: "Asad Ali"
-    },
-    {
-        id: 4,
-        title: "Building Interactive Dashboards with Advanced Power BI Features",
-        excerpt: "Take your Power BI skills to the next level with advanced features like drill-through, bookmarks, and custom visuals.",
-        category: "powerbi",
-        tags: ["Power BI", "Advanced", "Dashboards"],
-        date: "2025-01-01",
-        readTime: "15 min read",
-        image: "../images/Power BI 3.png",
-        author: "Asad Ali"
-    },
-    {
-        id: 5,
-        title: "Data Visualization Best Practices: Telling Stories with Data",
-        excerpt: "Learn the principles of effective data visualization and how to create compelling charts that communicate insights clearly.",
+        title: "Random Forest vs Logistic Regression: A Practical Comparison Through Real Projects",
+        excerpt: "A detailed comparison between Logistic Regression and Random Forest based on real project results. Learn when to use which model and understand their strengths and limitations.",
         category: "insights",
-        tags: ["Visualization", "Best Practices", "Design"],
-        date: "2024-12-28",
-        readTime: "7 min read",
+        tags: ["Model Comparison", "Machine Learning", "Performance Analysis"],
+        date: "2025-01-16",
+        readTime: "8 min read",
         image: "../images/Data Analyst.png",
         author: "Asad Ali"
     },
     {
-        id: 6,
-        title: "Machine Learning with Python: From Basics to Deployment",
-        excerpt: "A comprehensive guide to machine learning using Python. Learn scikit-learn, model evaluation, and deployment strategies.",
+        id: 4,
+        title: "XGBoost for Classification – From Good to Exceptional",
+        excerpt: "Take your binary classification project from good to exceptional with XGBoost. Learn how gradient boosting works, implementation details, and why XGBoost is the gold standard in ML competitions.",
         category: "python",
-        tags: ["Python", "Machine Learning", "scikit-learn"],
-        date: "2024-12-25",
-        readTime: "20 min read",
-        image: "../images/Churn_ml.png",
+        tags: ["XGBoost", "Gradient Boosting", "Advanced ML", "Competition"],
+        date: "2025-01-14",
+        readTime: "15 min read",
+        image: "../images/Web_Scrape.png",
+        author: "Asad Ali"
+    },
+    {
+        id: 5,
+        title: "SVM vs KNN: Which One Should I Trust With My Classification?",
+        excerpt: "Exploring Support Vector Machines and K-Nearest Neighbors side by side. Real metrics, code, and observations to help you choose the right algorithm for your classification problems.",
+        category: "algorithms",
+        tags: ["SVM", "KNN", "Classification", "Algorithm Comparison"],
+        date: "2025-01-12",
+        readTime: "11 min read",
+        image: "../images/Logic.png",
         author: "Asad Ali"
     }
-    */
 ];
 
 function initializeArticles() {
@@ -344,6 +332,188 @@ function initializeLoadMore() {
 function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+// ===================================
+//   SEARCH FUNCTIONALITY
+// ===================================
+
+function initializeSearch() {
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+    const searchResultsCount = document.getElementById('search-results-count');
+    
+    if (!searchInput) return;
+    
+    let searchTimeout;
+    
+    // Search input event
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        const query = this.value.trim();
+        
+        // Show/hide clear button
+        if (query.length > 0) {
+            searchClear.style.display = 'block';
+        } else {
+            searchClear.style.display = 'none';
+        }
+        
+        // Debounce search
+        searchTimeout = setTimeout(() => {
+            performSearch(query);
+        }, 300);
+    });
+    
+    // Clear search
+    searchClear.addEventListener('click', function() {
+        searchInput.value = '';
+        this.style.display = 'none';
+        searchResultsCount.style.display = 'none';
+        displayArticles(articlesData);
+        
+        // Reset filter buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+    });
+    
+    // Enter key search
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            performSearch(this.value.trim());
+        }
+    });
+}
+
+function performSearch(query) {
+    const searchResultsCount = document.getElementById('search-results-count');
+    
+    if (!query) {
+        displayArticles(articlesData);
+        searchResultsCount.style.display = 'none';
+        return;
+    }
+    
+    // Search through articles
+    const filteredArticles = articlesData.filter(article => {
+        const searchText = (
+            article.title + ' ' +
+            article.excerpt + ' ' +
+            article.category + ' ' +
+            (article.tags ? article.tags.join(' ') : '')
+        ).toLowerCase();
+        
+        return searchText.includes(query.toLowerCase());
+    });
+    
+    // Display results
+    displayArticles(filteredArticles);
+    
+    // Show results count
+    const resultCount = filteredArticles.length;
+    searchResultsCount.textContent = `Found ${resultCount} article${resultCount !== 1 ? 's' : ''} for "${query}"`;
+    searchResultsCount.style.display = 'block';
+    
+    // Reset filter buttons when searching
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => btn.classList.remove('active'));
+}
+
+// ===================================
+//   CONTACT FORM
+// ===================================
+
+function initializeContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('contact-form-status');
+    
+    if (!contactForm) return;
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message')
+        };
+        
+        // Validate form
+        if (!validateContactForm(data)) {
+            showFormStatus('error', 'Please fill in all required fields correctly.');
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = contactForm.querySelector('.contact-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission (replace with actual submission logic)
+        setTimeout(() => {
+            handleContactFormSubmission(data, submitBtn, originalText);
+        }, 2000);
+    });
+}
+
+function validateContactForm(data) {
+    // Basic validation
+    if (!data.name || data.name.length < 2) return false;
+    if (!data.email || !isValidEmail(data.email)) return false;
+    if (!data.subject) return false;
+    if (!data.message || data.message.length < 10) return false;
+    
+    return true;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function handleContactFormSubmission(data, submitBtn, originalText) {
+    // In a real application, you would send this to your backend
+    // For now, we'll simulate success and create a mailto link
+    
+    const subject = encodeURIComponent(`Blog Contact: ${data.subject}`);
+    const body = encodeURIComponent(
+        `Name: ${data.name}\n` +
+        `Email: ${data.email}\n` +
+        `Subject: ${data.subject}\n\n` +
+        `Message:\n${data.message}\n\n` +
+        `---\nSent from Asad In Data Blog Contact Form`
+    );
+    
+    // Open email client
+    window.location.href = `mailto:asadalich56@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Show success message
+    showFormStatus('success', 'Message prepared! Your email client should open. If not, please email me directly at asadalich56@gmail.com');
+    
+    // Reset form
+    document.getElementById('contact-form').reset();
+    
+    // Reset button
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+}
+
+function showFormStatus(type, message) {
+    const formStatus = document.getElementById('contact-form-status');
+    formStatus.className = `form-status ${type}`;
+    formStatus.textContent = message;
+    formStatus.style.display = 'block';
+    
+    // Hide after 5 seconds for success, 7 seconds for error
+    setTimeout(() => {
+        formStatus.style.display = 'none';
+    }, type === 'success' ? 5000 : 7000);
 }
 
 // ===================================

@@ -643,16 +643,58 @@
     padding: var(--spacing-2xl);
 }
 
-.comments-placeholder {
+.comments-widget {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+}
+
+#utterances-container {
+    min-height: 200px;
+    position: relative;
+}
+
+.comments-error {
     text-align: center;
+    padding: var(--spacing-2xl);
     color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+}
+
+.comments-error i {
+    font-size: 2rem;
+    color: #f59e0b;
+    margin-bottom: var(--spacing-md);
+}
+
+.comments-error h4 {
+    color: var(--text-primary);
+    margin: var(--spacing-md) 0;
+}
+
+.comments-alternative {
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
+}
+
+.comments-alternative h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.2rem;
+}
+
+.comments-alternative p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
 }
 
 .social-discussion {
     display: flex;
     justify-content: center;
     gap: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
+    flex-wrap: wrap;
 }
 
 .discuss-btn {
@@ -666,12 +708,16 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
     transition: all var(--transition-medium);
+    flex: 1;
+    max-width: 200px;
+    justify-content: center;
 }
 
 .discuss-btn:hover {
     background: var(--primary-color);
     color: var(--white);
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
 }
 
 /* ===================================
@@ -841,6 +887,15 @@
         gap: var(--spacing-md);
     }
     
+    .discuss-btn {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .comments-container {
+        padding: var(--spacing-xl);
+    }
+    
     .nav-actions {
         display: none;
     }
@@ -954,6 +1009,19 @@
         padding: var(--spacing-md);
         font-size: 0.9rem;
         overflow-x: auto;
+    }
+    
+    .comments-container {
+        padding: var(--spacing-lg);
+    }
+    
+    .comments-alternative h3 {
+        font-size: 1.1rem;
+    }
+    
+    .discuss-btn {
+        font-size: 0.9rem;
+        padding: var(--spacing-md);
     }
     
     .article-body table {

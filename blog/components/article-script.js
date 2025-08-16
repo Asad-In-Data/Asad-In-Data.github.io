@@ -6,296 +6,671 @@
 const articlesDatabase = {
     1: {
         id: 1,
-        title: "Getting Started with Power BI: A Complete Beginner's Guide",
-        excerpt: "Learn the fundamentals of Power BI and how to create your first dashboard. This comprehensive guide covers everything from data connection to visualization.",
-        category: "powerbi",
-        tags: ["Power BI", "Beginner", "Tutorial"],
-        date: "2025-01-15",
-        readTime: "8 min read",
-        image: "../images/Power BI 1.png",
+        title: "Mastering Logistic Regression as a Base Model – A Self-Taught Perspective",
+        excerpt: "As someone learning machine learning by building real-world projects, I've come to appreciate the power of Logistic Regression as a solid baseline model. Learn how it works, why we use it, and how to handle imbalanced data.",
+        category: "python",
+        tags: ["Machine Learning", "Logistic Regression", "Python", "Classification"],
+        date: "2025-01-20",
+        readTime: "12 min read",
+        image: "../images/Churn_ml.png",
         author: "Asad Ali",
         content: `
-# Getting Started with Power BI: A Complete Beginner's Guide
+# Mastering Logistic Regression as a Base Model – A Self-Taught Perspective
 
-Power BI is a powerful business analytics tool that helps you visualize your data and share insights across your organization. In this comprehensive guide, we'll cover everything you need to know to get started with Power BI.
+As someone learning machine learning by building real-world projects (rather than watching endless lectures), I've come to appreciate the power of Logistic Regression as a solid baseline model. It's simple, fast, interpretable, and surprisingly effective in many real-world scenarios.
 
-## What is Power BI?
+In this post, I'll walk through what Logistic Regression is, how it works, why we use it, and what I've learned while applying it in practice – especially when dealing with imbalanced classification problems.
 
-Power BI is a collection of software services, apps, and connectors that work together to turn your unrelated sources of data into coherent, visually immersive, and interactive insights. Whether your data is a simple Excel spreadsheet or a collection of cloud-based and on-premises hybrid data warehouses, Power BI lets you easily connect to your data sources, visualize what's important, and share that with anyone or everyone you want.
+## What is Logistic Regression?
 
-## Key Components of Power BI
+Despite its name, Logistic Regression is not a regression algorithm – it's used for binary classification tasks. That means it helps answer questions like:
 
-### Power BI Desktop
-Power BI Desktop is a free application you can install on your local computer that lets you connect to, transform, and visualize your data. With Power BI Desktop, you can connect to multiple different sources of data, and combine them into a data model.
+- Will the customer churn? (Yes/No)
+- Is this transaction fraudulent? (Yes/No) 
+- Does the patient have the disease? (Yes/No)
 
-### Power BI Service
-The Power BI service is the online SaaS (Software as a Service) part of Power BI. In the Power BI service, you can share reports and dashboards with your team or across your organization.
+At its core, it calculates a linear combination of the input features, applies a sigmoid function to squash the output between 0 and 1, and then uses a threshold (usually 0.5) to decide which class the input belongs to.
 
-### Power BI Mobile Apps
-Power BI mobile apps are available for Windows, iOS, and Android devices. The mobile apps let you view and interact with your Power BI dashboards and reports while you're on the go.
+## How It Works (Intuitively)
 
-## Getting Started: Your First Dashboard
-
-Let's create your first Power BI dashboard step by step:
-
-### Step 1: Install Power BI Desktop
-1. Go to the official Microsoft Power BI website
-2. Download Power BI Desktop for free
-3. Install the application on your computer
-
-### Step 2: Connect to Your Data
-\`\`\`sql
--- Example: Connecting to SQL Server
-SELECT 
-    ProductName,
-    CategoryName,
-    Sales,
-    OrderDate
-FROM 
-    SalesData
-WHERE 
-    OrderDate >= '2023-01-01'
+### 1. Compute Linear Score (z):
+\`\`\`
+z = w1x1 + w2x2 + ... + b
 \`\`\`
 
-### Step 3: Create Your First Visualization
-Once you've connected to your data, you can start creating visualizations. Power BI offers various chart types:
+### 2. Apply Sigmoid Function:
+Converts z to a probability between 0 and 1:
+\`\`\`
+σ(z) = 1/(1 + e^(-z))
+\`\`\`
 
-- **Bar Charts**: Great for comparing values across categories
-- **Line Charts**: Perfect for showing trends over time
-- **Pie Charts**: Useful for showing parts of a whole
-- **Tables**: For detailed data viewing
-- **Maps**: For geographical data visualization
+### 3. Make Prediction:
+- If probability > 0.5 → Class 1
+- Else → Class 0
 
-## Best Practices for Power BI
+This simplicity makes Logistic Regression ideal as a starting point for most binary classification problems.
 
-> "The goal is to turn data into information, and information into insight." - Carly Fiorina
+## Why I Use It as a Base Model
 
-Here are some best practices to follow when creating Power BI reports:
+In every project I work on, I start with Logistic Regression because:
 
-1. **Keep it Simple**: Don't overcrowd your dashboards with too many visuals
-2. **Use Consistent Colors**: Maintain a consistent color scheme throughout your reports
-3. **Optimize Performance**: Use DirectQuery wisely and consider data refresh schedules
-4. **Security First**: Implement row-level security when sharing sensitive data
+✅ **It's fast and easy to implement**  
+✅ **It's interpretable** – the coefficients tell me how features affect the output  
+✅ **It gives me a baseline** to compare more complex models like Random Forest or XGBoost  
+✅ **It often performs surprisingly well**, especially when combined with proper preprocessing  
 
-## Advanced Features to Explore
+## My Dataset: Imbalanced Binary Classification
 
-As you become more comfortable with Power BI, explore these advanced features:
+While working on a binary classification dataset with class imbalance (Class 1 ≈ 27%, Class 0 ≈ 73%), I applied logistic regression after feature scaling:
 
-- **DAX (Data Analysis Expressions)**: Create custom calculations and measures
-- **Power Query**: Transform and clean your data before visualization
-- **Custom Visuals**: Import additional visualizations from the marketplace
-- **Real-time Dashboards**: Set up live data streaming for real-time insights
+### Preprocessing
+\`\`\`python
+from sklearn.preprocessing import StandardScaler
 
-## Conclusion
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+\`\`\`
 
-Power BI is an incredibly powerful tool that can transform how you work with data. Start with simple visualizations and gradually explore more advanced features as you build confidence. Remember, the key to effective data visualization is telling a clear story with your data.
+### Training the Model
+\`\`\`python
+from sklearn.linear_model import LogisticRegression
 
-Ready to dive deeper? Check out our upcoming articles on advanced Power BI techniques and DAX formulas!
+model = LogisticRegression(max_iter=1000, class_weight='balanced')
+model.fit(X_train_scaled, y_train)
+\`\`\`
+
+### Evaluation
+\`\`\`python
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, roc_auc_score
+
+y_pred = model.predict(X_test_scaled)
+y_proba = model.predict_proba(X_test_scaled)[:, 1]
+
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Confusion Matrix:\\n", confusion_matrix(y_test, y_pred))
+print("Classification Report:\\n", classification_report(y_test, y_pred))
+print("ROC-AUC Score:", roc_auc_score(y_test, y_proba))
+\`\`\`
+
+## Results (Sample Output)
+
+**Accuracy:** 78.8%  
+**Confusion Matrix:**
+\`\`\`
+[[916 117]
+ [181 193]]
+\`\`\`
+
+**Precision (Class 1):** 62%  
+**Recall (Class 1):** 52%  
+**F1-Score (Class 1):** 56%  
+**ROC-AUC Score:** ~0.79  
+
+These results revealed something crucial: Although the overall accuracy was good, the recall for Class 1 (minority class) was low, which means the model was missing actual positive cases.
+
+This insight led me to experiment further with:
+- Class balancing techniques (\`class_weight='balanced'\`)
+- Resampling methods like SMOTE
+- Other models like Random Forest for deeper analysis
+
+## Key Takeaways for Fellow Learners
+
+- **Logistic Regression is the best place to start** in any binary classification task
+- **Don't blindly trust accuracy** – always check precision, recall, F1-score, and confusion matrix
+- **If your data is imbalanced, handle it explicitly** using class weights or oversampling
+- **Logistic Regression is also great for learning feature importance** and understanding relationships in your data
+
+| Use Case | Recommended? |
+|----------|--------------|
+| Binary classification (yes/no) | ✅ Yes |
+| Simple and linearly separable data | ✅ Yes |
+| Feature importance explanation needed | ✅ Yes |
+| Complex non-linear patterns | ❌ Try Random Forest / XGBoost |
+
+## Final Thought
+
+You don't need to start with complex models. A well-tuned Logistic Regression model – with good preprocessing and careful evaluation – can take you surprisingly far.
+
+I'll continue posting about my journey with classification models, including decision trees, KNN, and ensemble techniques. Let me know if you'd like to see the code, data, or full notebook.
+
+> **Your Turn:** Have you tried Logistic Regression in your own projects? What did you discover about your data when you did? Drop your experience in the comments or DM me – let's connect and grow together! 🚀
         `
     },
     2: {
         id: 2,
-        title: "Python for Data Analysis: Essential Libraries and Techniques",
-        excerpt: "Discover the most important Python libraries for data analysis including Pandas, NumPy, and Matplotlib. Learn practical techniques with real examples.",
+        title: "From Baseline to Power: Using Random Forest to Boost Classification Performance",
+        excerpt: "After building a solid baseline with Logistic Regression, discover how Random Forest can take your machine learning project to the next level. Learn about ensemble methods and feature importance.",
         category: "python",
-        tags: ["Python", "Data Analysis", "Pandas"],
-        date: "2025-01-10",
-        readTime: "12 min read",
+        tags: ["Random Forest", "Machine Learning", "Ensemble", "Feature Importance"],
+        date: "2025-01-18",
+        readTime: "10 min read",
         image: "../images/Auto_EDA.png",
         author: "Asad Ali",
         content: `
-# Python for Data Analysis: Essential Libraries and Techniques
+# From Baseline to Power: Using Random Forest to Boost Classification Performance
 
-Python has become the go-to language for data analysis due to its simplicity, powerful libraries, and vibrant community. In this comprehensive guide, we'll explore the essential libraries and techniques every data analyst should know.
+After building a solid baseline with Logistic Regression, I decided to take my machine learning project to the next level using one of the most powerful and widely-used classifiers in the industry – Random Forest.
 
-## Why Python for Data Analysis?
+In this article, I'll walk through what Random Forest is, how it works, why it's better for complex problems, and how I used it to improve my classification project – especially for handling imbalanced data.
 
-Python offers several advantages for data analysis:
+## What Is Random Forest?
 
-- **Easy to Learn**: Simple, readable syntax
-- **Rich Ecosystem**: Extensive libraries for data science
-- **Community Support**: Large community and abundant resources
-- **Versatility**: Can handle everything from data cleaning to machine learning
-- **Integration**: Works well with databases, web APIs, and other tools
+Random Forest is an ensemble machine learning algorithm that builds multiple decision trees, and combines their predictions to make a final output. It's one of the most reliable models in supervised learning, especially when your data has:
 
-## Essential Libraries for Data Analysis
+- Non-linear relationships
+- Noisy features
+- Imbalanced classes
 
-### 1. NumPy - Numerical Computing
+## How It Works (Simply)
 
-NumPy is the foundation of the Python data science stack. It provides support for large, multi-dimensional arrays and matrices.
+### 1. Bootstrapping
+Random samples (with replacement) are drawn to train each tree.
+
+### 2. Random Feature Selection
+At each node, a random subset of features is chosen to split on – this creates diversity in the trees.
+
+### 3. Voting/Averaging
+- **For classification:** Majority vote from all trees
+- **For regression:** Average of all predictions
+
+This results in a robust, low-variance, and high-accuracy model.
+
+## Why I Switched to Random Forest
+
+In my binary classification project, I had already used Logistic Regression. While it gave good accuracy (~79%), it struggled with Class 1 recall due to class imbalance.
+
+Random Forest allowed me to:
+- Capture non-linear patterns
+- Handle imbalance using \`class_weight='balanced'\`
+- Gain insights via feature importance
+- Improve recall and F1-score
+
+## Model Implementation
+
+Here's the implementation I used:
 
 \`\`\`python
-import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score
 
-# Creating arrays
-arr = np.array([1, 2, 3, 4, 5])
-matrix = np.array([[1, 2], [3, 4]])
+# Initialize model
+rf_model = RandomForestClassifier(
+    n_estimators=100,
+    class_weight='balanced',
+    random_state=42
+)
 
-# Basic operations
-print(arr.mean())  # Calculate mean
-print(arr.std())   # Calculate standard deviation
-print(matrix.T)    # Transpose matrix
+# Train
+rf_model.fit(X_train, y_train)
+
+# Predict
+y_pred = rf_model.predict(X_test)
+y_proba = rf_model.predict_proba(X_test)[:, 1]
+
+# Evaluate
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Confusion Matrix:\\n", confusion_matrix(y_test, y_pred))
+print("Classification Report:\\n", classification_report(y_test, y_pred))
+print("ROC-AUC Score:", roc_auc_score(y_test, y_proba))
 \`\`\`
 
-### 2. Pandas - Data Manipulation and Analysis
+## Results (Sample)
 
-Pandas is the cornerstone of data analysis in Python, providing data structures and operations for manipulating numerical tables and time series.
+**Accuracy:** 83%  
+**Precision (Class 1):** 70%  
+**Recall (Class 1):** 61%  
+**F1-score (Class 1):** 65%  
+**ROC-AUC:** ~0.86  
+
+🎯 **Compared to Logistic Regression, Random Forest significantly improved recall for Class 1** – which was the priority in my project.
+
+## Bonus: Feature Importance Visualization
+
+Understanding which features drive predictions is critical. Random Forest makes this easy:
 
 \`\`\`python
 import pandas as pd
+import matplotlib.pyplot as plt
 
-# Reading data
-df = pd.read_csv('sales_data.csv')
-
-# Basic exploration
-print(df.head())           # First 5 rows
-print(df.info())           # Data types and info
-print(df.describe())       # Statistical summary
-
-# Data manipulation
-filtered_df = df[df['sales'] > 1000]
-grouped = df.groupby('category')['sales'].sum()
+feat_imp = pd.Series(rf_model.feature_importances_, index=X.columns)
+feat_imp.nlargest(10).plot(kind='barh', title='Top 10 Feature Importances')
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()
 \`\`\`
 
-### 3. Matplotlib & Seaborn - Data Visualization
+This helped me explain the model's behavior and identify key drivers in the data.
 
-These libraries help create beautiful and informative visualizations.
+## Model Tuning (Optional)
+
+Later, I'll tune hyperparameters using GridSearchCV. Some parameters worth exploring:
+
+| Parameter | Description |
+|-----------|-------------|
+| \`n_estimators\` | Number of trees |
+| \`max_depth\` | Max depth of each tree |
+| \`min_samples_split\` | Min samples to split a node |
+| \`max_features\` | Max features considered at each split |
+
+## Key Takeaways
+
+- **Random Forest is easy to use and powerful**
+- **It handles class imbalance better than Logistic Regression**
+- **Feature importance provides explainability**
+- **Works well with non-linear and noisy data**
+- **A great next step after building a simple baseline**
+
+## What's Next?
+
+I'll now compare Random Forest with other advanced classifiers like:
+- 🔹 Support Vector Machines (SVM)
+- 🔹 K-Nearest Neighbors (KNN)
+- 🔹 XGBoost
+
+Stay tuned for Part 3 of my journey – where I'll bring everything together and build a final comparison report.
+
+> **Are you also improving your model performance with ensemble methods?** Let me know your experience or drop your questions in the comments.
+
+Let's keep learning – one model at a time. 🚀
+
+**Follow me for more real-world, project-based machine learning breakdowns. No lectures – just code, logic, and results.**
+        `
+    },
+    3: {
+        id: 3,
+        title: "Random Forest vs Logistic Regression: A Practical Comparison Through Real Projects",
+        excerpt: "A detailed comparison between Logistic Regression and Random Forest based on real project results. Learn when to use which model and understand their strengths and limitations.",
+        category: "insights",
+        tags: ["Model Comparison", "Machine Learning", "Performance Analysis"],
+        date: "2025-01-16",
+        readTime: "8 min read",
+        image: "../images/Data Analyst.png",
+        author: "Asad Ali",
+        content: `
+# Random Forest vs Logistic Regression: A Practical Comparison Through Real Projects
+
+When building machine learning models, I always start with a simple baseline – and gradually move toward more complex, powerful algorithms. In one of my recent binary classification projects, I began with Logistic Regression, then improved results using Random Forest.
+
+In this post, I'll walk through the key differences, strengths, limitations, and performance comparison between the two – based on real project results.
+
+## A Quick Recap of the Models
+
+### 🔹 Logistic Regression
+- A linear model for binary classification
+- Computes a weighted sum of features and applies a sigmoid function
+- Outputs a probability between 0 and 1
+- Assumes linear relationship between input and output
+
+### 🔹 Random Forest
+- An ensemble of decision trees
+- Uses bootstrapping + feature randomness to build diverse trees
+- Aggregates results via majority voting
+- Handles non-linear patterns better
+
+## My Project Setup
+
+I used both models on the same dataset:
+- Binary classification problem
+- Slightly imbalanced target variable
+- Preprocessed features (scaling for Logistic Regression only)
+- Evaluated using: Accuracy, Precision, Recall, F1-Score, ROC-AUC
+
+## Performance Comparison
+
+| Metric | Logistic Regression | Random Forest |
+|--------|-------------------|---------------|
+| **Accuracy** | 78.8% | 83% |
+| **Precision (Class 1)** | 62% | 70% |
+| **Recall (Class 1)** | 52% | 61% |
+| **F1-Score (Class 1)** | 56% | 65% |
+| **ROC-AUC Score** | ~0.79 | ~0.86 |
+
+🎯 **Observation:** Random Forest outperformed Logistic Regression on almost every metric – especially Recall and F1-score for the minority class.
+
+## Interpretation
+
+| Factor | Logistic Regression | Random Forest |
+|--------|-------------------|---------------|
+| **🔹 Linear vs Non-linear** | Works well if data is linearly separable | Handles complex decision boundaries |
+| **🔹 Needs Scaling?** | Yes | No |
+| **🔹 Interpretability** | High (coefficients are explainable) | Lower (black-box, but offers feature importance) |
+| **🔹 Imbalance Handling** | Needs class_weight or resampling | Works well with \`class_weight='balanced'\` |
+| **🔹 Speed** | Fast | Slower |
+| **🔹 Use Case** | Quick baseline & explainable models | Production-level performance |
+
+## Feature Importance (Bonus from Random Forest)
+
+One benefit I got from Random Forest was the ability to visualize feature importance:
+
+\`\`\`python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+feat_imp = pd.Series(rf_model.feature_importances_, index=X.columns)
+feat_imp.nlargest(10).plot(kind='barh', title='Top 10 Important Features')
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()
+\`\`\`
+
+This gave me a clear view of which features were driving predictions – something not directly available in logistic regression without deep analysis.
+
+## Key Takeaways
+
+- **Start with Logistic Regression** for a fast, interpretable baseline
+- **Move to Random Forest when:**
+  - You need better recall or overall accuracy
+  - Your data shows non-linearity
+  - You can afford slightly more training time
+- **Evaluate models beyond accuracy:** check precision, recall, and ROC-AUC
+- **Compare results, not just algorithms** – each dataset behaves differently
+
+## What's Next?
+
+After Logistic Regression and Random Forest, I upgraded my model performance even further by introducing XGBoost – an advanced gradient boosting algorithm.
+
+**Coming up next:**
+🚀 **"XGBoost for Classification – How I Took My Model from Good to Exceptional"**
+
+Let's keep leveling up. 🚀
+
+> **Have you compared models on your project? What worked best for you?**  
+I'd love to hear your approach – drop a comment or connect with me!
+        `
+    },
+    4: {
+        id: 4,
+        title: "XGBoost for Classification – From Good to Exceptional",
+        excerpt: "Take your binary classification project from good to exceptional with XGBoost. Learn how gradient boosting works, implementation details, and why XGBoost is the gold standard in ML competitions.",
+        category: "python",
+        tags: ["XGBoost", "Gradient Boosting", "Advanced ML", "Competition"],
+        date: "2025-01-14",
+        readTime: "15 min read",
+        image: "../images/Web_Scrape.png",
+        author: "Asad Ali",
+        content: `
+# XGBoost for Classification – From Good to Exceptional
+
+After using Logistic Regression as a base model and Random Forest for a power boost, I decided to go one step further – and it was worth it.
+
+In this post, I'll break down how I used XGBoost to take my binary classification project from good to exceptional. From intuition to implementation, you'll see why XGBoost is often the gold standard in machine learning competitions and production systems alike.
+
+## What is XGBoost?
+
+XGBoost stands for **eXtreme Gradient Boosting** – it's a boosted ensemble of decision trees trained sequentially, where each tree tries to fix the mistakes of the previous one.
+
+Unlike Random Forest, which builds trees independently, XGBoost learns from errors – like a true student.
+
+It uses gradient descent optimization to minimize loss, and regularization to prevent overfitting.
+
+## How XGBoost Works (Intuition)
+
+1. **Train the first tree** to make initial predictions
+2. **Compute the errors** (residuals)
+3. **Train the next tree** to predict these residuals
+4. **Repeat** for many small trees
+5. **Add up the predictions** (with weights) for the final output
+
+Each tree is a "corrective layer," making the ensemble smarter with every step.
+
+## Why I Switched to XGBoost
+
+After using Random Forest, I still had:
+- Slight class imbalance issues
+- Desire for even better recall & precision
+- Curiosity about state-of-the-art models
+
+I knew XGBoost could offer:
+- **Boosted performance**
+- **Fine control through hyperparameters**
+- **Built-in handling for imbalance**
+- **Fast training** even on large datasets
+
+## Model Implementation (My Workflow)
+
+\`\`\`python
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score
+
+# Initialize XGBoost model
+xgb_model = XGBClassifier(
+    n_estimators=100,
+    learning_rate=0.1,
+    max_depth=5,
+    scale_pos_weight=2,   # handles imbalance
+    use_label_encoder=False,
+    eval_metric='logloss',
+    random_state=42
+)
+
+# Train
+xgb_model.fit(X_train, y_train)
+
+# Predict
+y_pred = xgb_model.predict(X_test)
+y_proba = xgb_model.predict_proba(X_test)[:, 1]
+
+# Evaluate
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Confusion Matrix:\\n", confusion_matrix(y_test, y_pred))
+print("Classification Report:\\n", classification_report(y_test, y_pred))
+print("ROC-AUC Score:", roc_auc_score(y_test, y_proba))
+\`\`\`
+
+## Performance Results
+
+**Accuracy:** 85%  
+**Precision (Class 1):** 76%  
+**Recall (Class 1):** 68%  
+**F1-Score (Class 1):** 72%  
+**ROC-AUC Score:** ~0.89  
+
+🎯 **That's a solid improvement over both Logistic Regression and Random Forest!**
+
+## Key Benefits I Observed
+
+| Feature | Why It Helped |
+|---------|---------------|
+| **🔹 Boosting** | Better learning from errors |
+| **🔹 scale_pos_weight** | Better class 1 recall in imbalanced data |
+| **🔹 Regularization** | Reduced overfitting risk |
+| **🔹 Faster training** | Efficient on medium-large datasets |
+| **🔹 Feature importance** | Built-in interpretation tools |
+
+## Feature Importance (Bonus Visualization)
 
 \`\`\`python
 import matplotlib.pyplot as plt
-import seaborn as sns
+from xgboost import plot_importance
 
-# Basic plot
-plt.figure(figsize=(10, 6))
-plt.plot(df['date'], df['sales'])
-plt.title('Sales Over Time')
-plt.show()
-
-# Seaborn for statistical plots
-sns.boxplot(data=df, x='category', y='sales')
+plot_importance(xgb_model, max_num_features=10, height=0.5, title='Top Features by XGBoost')
+plt.tight_layout()
 plt.show()
 \`\`\`
 
-## Common Data Analysis Workflows
+This gave me deeper visibility into which features were truly driving predictions – critical for stakeholder reporting.
 
-### 1. Data Loading and Exploration
+## Next Steps: Hyperparameter Tuning
+
+XGBoost becomes even more powerful when fine-tuned.
+
+| Parameter | Effect |
+|-----------|--------|
+| \`max_depth\` | Tree depth control |
+| \`learning_rate\` | Smaller = slower but better |
+| \`n_estimators\` | Total number of trees |
+| \`subsample\` | Row sampling for regularization |
+| \`colsample_bytree\` | Feature sampling per tree |
+| \`scale_pos_weight\` | Balances imbalance |
+| \`gamma, lambda\` | Controls overfitting (regularization) |
+
+You can use GridSearchCV or Optuna for tuning.
+
+## Final Comparison Table
+
+| Metric | Logistic Regression | Random Forest | XGBoost |
+|--------|-------------------|---------------|---------|
+| **Accuracy** | 78.8% | 83% | **85%** |
+| **Precision (Class 1)** | 62% | 70% | **76%** |
+| **Recall (Class 1)** | 52% | 61% | **68%** |
+| **F1-score (Class 1)** | 56% | 65% | **72%** |
+| **ROC-AUC** | ~0.79 | ~0.86 | **~0.89** |
+
+🏆 **XGBoost wins across the board.**
+
+## Takeaways for Practitioners
+
+- **Always start simple** – build, learn, improve
+- **XGBoost is worth the jump when:**
+  - Accuracy needs a boost
+  - Imbalance is an issue
+  - You need fine control
+- **It's fast, reliable, and trusted by Kaggle champions & companies alike**
+
+## What's Next?
+
+I'll now finalize my project by comparing all models, visualizing results, and packaging insights into a complete project report.
+
+**Up next:**
+🚀 **"Model Comparison & Final Evaluation – Logistic vs Random Forest vs XGBoost"**
+
+Let's keep building.  
+One model at a time. 🚀
+
+> **Have you used XGBoost in your projects?**  
+What challenges did you face while tuning it?  
+Let's talk in the comments!
+        `
+    },
+    5: {
+        id: 5,
+        title: "SVM vs KNN: Which One Should I Trust With My Classification?",
+        excerpt: "Exploring Support Vector Machines and K-Nearest Neighbors side by side. Real metrics, code, and observations to help you choose the right algorithm for your classification problems.",
+        category: "python",
+        tags: ["SVM", "KNN", "Classification", "Algorithm Comparison"],
+        date: "2025-01-12",
+        readTime: "11 min read",
+        image: "../images/Logic.png",
+        author: "Asad Ali",
+        content: `
+# SVM vs KNN: Which One Should I Trust With My Classification?
+
+## Day 4 of My Model Exploration Log
+
+After testing Logistic Regression, Random Forest, and XGBoost on my classification project, I reached a fork in the road:
+
+**"Should I use Support Vector Machines (SVM)?  
+Or try K-Nearest Neighbors (KNN)?"**
+
+So I decided to test both, side by side, with real metrics, code, and observations.
+
+## Step 1: What Are These Models?
+
+### 🔹 SVM (Support Vector Machine)
+- Tries to draw the **best boundary** between classes
+- Focuses on **maximizing the margin** between the classes
+- Good for **clear separation**
+- Can be **kernelized** (RBF, poly) for complex boundaries
+
+**🎯 Ideal For:** Clean, high-dimensional data  
+**⚠️ Watch Out:** Slower on large datasets
+
+### 🔹 KNN (K-Nearest Neighbors)
+- **Memorizes the entire training data**
+- Classifies a point by **voting from its k-nearest neighbors**
+- **No learning phase** – pure instance-based
+
+**🎯 Ideal For:** Low-dimensional, well-distributed data  
+**⚠️ Watch Out:** Slows down during prediction
+
+## Step 2: Training Both Models
 
 \`\`\`python
-# Load data
-df = pd.read_csv('data.csv')
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score
 
-# Explore structure
-print(f"Shape: {df.shape}")
-print(f"Columns: {df.columns.tolist()}")
-print(f"Data types: {df.dtypes}")
+# SVM Model
+svm_model = SVC(kernel='rbf', probability=True, class_weight='balanced', random_state=42)
+svm_model.fit(X_train_scaled, y_train)
 
-# Check for missing values
-print(df.isnull().sum())
+# KNN Model
+knn_model = KNeighborsClassifier(n_neighbors=5)
+knn_model.fit(X_train_scaled, y_train)
 \`\`\`
 
-### 2. Data Cleaning
+## Step 3: Evaluation Loop
 
 \`\`\`python
-# Handle missing values
-df = df.dropna()  # Remove rows with missing values
-# or
-df = df.fillna(df.mean())  # Fill with mean
-
-# Remove duplicates
-df = df.drop_duplicates()
-
-# Data type conversion
-df['date'] = pd.to_datetime(df['date'])
-df['category'] = df['category'].astype('category')
+for name, model in zip(['SVM', 'KNN'], [svm_model, knn_model]):
+    y_pred = model.predict(X_test_scaled)
+    y_proba = model.predict_proba(X_test_scaled)[:, 1]
+    
+    print(f"\\n🔹 Results for: {name}")
+    print("Accuracy:", accuracy_score(y_test, y_pred))
+    print("Confusion Matrix:\\n", confusion_matrix(y_test, y_pred))
+    print("Classification Report:\\n", classification_report(y_test, y_pred))
+    print("ROC-AUC Score:", roc_auc_score(y_test, y_proba))
 \`\`\`
 
-### 3. Exploratory Data Analysis (EDA)
+## Step 4: My Observations
 
-\`\`\`python
-# Statistical summary
-print(df.describe())
+### 🔹 SVM:
+- **ROC-AUC:** 0.88
+- **Class 1 Recall:** 66%
+- **F1-score:** 69%
+- **Slower to train**, but great at precision and margin
 
-# Correlation analysis
-correlation_matrix = df.corr()
-sns.heatmap(correlation_matrix, annot=True)
+### 🔹 KNN:
+- **ROC-AUC:** 0.82
+- **Class 1 Recall:** 59%
+- **F1-score:** 63%
+- **Faster to implement**, slower to predict, and affected by scaling & k
 
-# Distribution plots
-df['sales'].hist(bins=30)
-plt.title('Sales Distribution')
-plt.show()
-\`\`\`
+## Step 5: When Would I Choose What?
 
-## Advanced Techniques
+| Use Case | Go with SVM | Go with KNN |
+|----------|-------------|-------------|
+| You want **clean margin** between classes | ✅ | ❌ |
+| Your data is **noisy or high-dimensional** | ✅ | ❌ |
+| You need **instant model** | ❌ | ✅ |
+| Dataset is **small** | ❌ | ✅ |
+| You're **experimenting fast** | ❌ | ✅ |
 
-### Group Operations
-\`\`\`python
-# Group by multiple columns
-result = df.groupby(['category', 'region']).agg({
-    'sales': ['sum', 'mean', 'count'],
-    'profit': 'sum'
-})
-\`\`\`
+## Final Verdict in My Case?
 
-### Time Series Analysis
-\`\`\`python
-# Set date as index
-df.set_index('date', inplace=True)
+I went with **SVM** because:
+- It gave **better class separation**
+- **Recall was stronger** (important in my use case)
+- **Margin was visibly clean** in 2D plots
 
-# Resample to monthly data
-monthly_sales = df['sales'].resample('M').sum()
+But KNN still taught me a lot about locality and scaling sensitivity.
 
-# Calculate rolling averages
-df['rolling_avg'] = df['sales'].rolling(window=7).mean()
-\`\`\`
+## My Tip If You're Choosing Between These
 
-### Pivot Tables
-\`\`\`python
-# Create pivot table
-pivot = pd.pivot_table(df, 
-                       values='sales', 
-                       index='category', 
-                       columns='month', 
-                       aggfunc='sum')
-\`\`\`
+**Try both. Seriously.**
 
-## Performance Tips
+Tune them a little. Plot decision boundaries.  
+Choose the one that makes your confusion matrix smile. 😊
 
-1. **Use Vectorized Operations**: Avoid loops when possible
-2. **Choose Appropriate Data Types**: Use categories for categorical data
-3. **Chunk Large Files**: Process large datasets in chunks
-4. **Use Built-in Functions**: Pandas functions are optimized
+## What's Next?
 
-\`\`\`python
-# Vectorized operation (fast)
-df['profit_margin'] = df['profit'] / df['sales']
+I'll now gather all results from:
+- Logistic Regression
+- Random Forest
+- XGBoost
+- SVM
+- KNN
 
-# Instead of loops (slow)
-# for i in range(len(df)):
-#     df.loc[i, 'profit_margin'] = df.loc[i, 'profit'] / df.loc[i, 'sales']
-\`\`\`
+and build a **final comparison dashboard + model ranking report**.
 
-## Best Practices
+Let's bring the whole project together. 🚀
 
-- **Document Your Code**: Use comments and docstrings
-- **Handle Errors Gracefully**: Use try-except blocks
-- **Validate Your Data**: Check data quality at each step
-- **Use Version Control**: Track changes with Git
-- **Test Your Analysis**: Verify results with different approaches
-
-## Conclusion
-
-Python's ecosystem provides powerful tools for data analysis. Start with these essential libraries and gradually explore more specialized tools as your needs grow. Remember, practice is key to mastering these techniques!
-
-In our next article, we'll dive deeper into advanced Pandas techniques and explore machine learning with scikit-learn.
+> **Got your own insights on SVM vs KNN?**  
+Drop a comment or show me your favorite kernel.
         `
     }
-    // Commented out additional articles - uncomment when you add more content
-    /*
-    // Add more articles here when ready
-    // 3: { ... },
-    // 4: { ... },
-    // etc.
-    */
 };
 
 // Initialize when DOM is loaded
@@ -306,6 +681,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeBookmark();
     initializeReadingProgress();
     loadRelatedArticles();
+    initializeComments();
     initializeNewsletterForm();
     initializeTheme();
     initializeBackToTop();
@@ -792,24 +1168,38 @@ function updateArticleNavigation(currentId) {
     const prevArticleLink = document.getElementById('prev-article');
     const nextArticleLink = document.getElementById('next-article');
     
+    // Check if elements exist
+    if (!prevArticleLink || !nextArticleLink) {
+        console.log('Navigation elements not found');
+        return;
+    }
+    
     // Previous article
     if (currentIndex > 0) {
         const prevArticle = allArticles[currentIndex - 1];
         prevArticleLink.href = `article.html?id=${prevArticle.id}`;
-        prevArticleLink.querySelector('.nav-title').textContent = prevArticle.title;
-        prevArticleLink.style.display = 'flex';
+        const prevTitle = prevArticleLink.querySelector('.nav-title');
+        if (prevTitle) {
+            prevTitle.textContent = prevArticle.title;
+        }
+        prevArticleLink.parentElement.style.display = 'flex';
+        prevArticleLink.style.pointerEvents = 'auto';
     } else {
-        prevArticleLink.style.display = 'none';
+        prevArticleLink.parentElement.style.display = 'none';
     }
     
     // Next article
     if (currentIndex < allArticles.length - 1) {
         const nextArticle = allArticles[currentIndex + 1];
         nextArticleLink.href = `article.html?id=${nextArticle.id}`;
-        nextArticleLink.querySelector('.nav-title').textContent = nextArticle.title;
-        nextArticleLink.style.display = 'flex';
+        const nextTitle = nextArticleLink.querySelector('.nav-title');
+        if (nextTitle) {
+            nextTitle.textContent = nextArticle.title;
+        }
+        nextArticleLink.parentElement.style.display = 'flex';
+        nextArticleLink.style.pointerEvents = 'auto';
     } else {
-        nextArticleLink.style.display = 'none';
+        nextArticleLink.parentElement.style.display = 'none';
     }
 }
 
@@ -878,6 +1268,79 @@ function showToast(message, type = 'info') {
             }
         }, 300);
     }, 3000);
+}
+
+// ===================================
+//   COMMENTS SYSTEM (UTTERANCES)
+// ===================================
+
+function initializeComments() {
+    const utterancesContainer = document.getElementById('utterances-container');
+    
+    if (!utterancesContainer) return;
+    
+    // Create Utterances script
+    const utterancesScript = document.createElement('script');
+    utterancesScript.src = 'https://utteranc.es/client.js';
+    utterancesScript.async = true;
+    utterancesScript.crossOrigin = 'anonymous';
+    
+    // Configure Utterances
+    utterancesScript.setAttribute('repo', 'Asad-In-Data/blog-comments'); // You'll need to create this repo
+    utterancesScript.setAttribute('issue-term', 'pathname');
+    utterancesScript.setAttribute('theme', getUtterancesTheme());
+    utterancesScript.setAttribute('label', 'blog-comment');
+    
+    // Add error handling
+    utterancesScript.onload = function() {
+        console.log('Utterances comments loaded successfully');
+    };
+    
+    utterancesScript.onerror = function() {
+        console.log('Failed to load Utterances comments');
+        showCommentsError();
+    };
+    
+    // Append script to container
+    utterancesContainer.appendChild(utterancesScript);
+    
+    // Listen for theme changes to update Utterances
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            setTimeout(() => {
+                updateUtterancesTheme();
+            }, 300);
+        });
+    }
+}
+
+function getUtterancesTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    return currentTheme === 'dark' ? 'github-dark' : 'github-light';
+}
+
+function updateUtterancesTheme() {
+    const utterancesFrame = document.querySelector('.utterances-frame');
+    if (utterancesFrame) {
+        const theme = getUtterancesTheme();
+        const message = {
+            type: 'set-theme',
+            theme: theme
+        };
+        utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+}
+
+function showCommentsError() {
+    const utterancesContainer = document.getElementById('utterances-container');
+    utterancesContainer.innerHTML = `
+        <div class="comments-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h4>Comments temporarily unavailable</h4>
+            <p>Having trouble loading comments? Please use the alternative discussion channels below or email me directly.</p>
+        </div>
+    `;
 }
 
 // ===================================
